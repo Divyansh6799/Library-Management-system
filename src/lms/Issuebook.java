@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.event.ActionListener;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -319,40 +320,31 @@ public class Issuebook extends JFrame {
                     	COURSE_1.setText("");
                     	BRANCH_1.setText("");
                 }}else {
-                String sql1 = "INSERT INTO ISSUEBOOKS(ROLL_NUMBER,NAME, BOOK_ID, BOOK_NAME, AUTHOR,EDITION,DATE_OF_ISSUE,DATE_OF_RETURN,RETURN_STATUS,CONTACT) VALUES(?,?,?,?,?, ?, ?, ?,'NO',?)";
-	            PreparedStatement st1 = con.prepareStatement(sql1);
-	            st1.setString(1, ROLL_NUMBER.getText());
-                st1.setString(2, FIRST_NAME.getText());
-                st1.setString(3,(String) comboBox_book.getSelectedItem());
-                st1.setString(4, BOOK_NAME.getText());
-                st1.setString(5, AUTHOR.getText());
-                st1.setString(6, EDITION.getText());
-                st1.setString(7, datetime.getText());
-                st1.setString(8, returndate.getText());
-                st1.setString(9, CONTACT.getText());
-                
-                int i = st1.executeUpdate();
-                if(i>0) {
-                	String sql2 = "UPDATE BOOKS SET TOTAL_BOOKS=TOTAL_BOOKS-1 WHERE BOOK_ID=?";
-    	            PreparedStatement st2 = con.prepareStatement(sql2);
-    	            st2.setString(1,(String) comboBox_book.getSelectedItem());
-    	            int j=st2.executeUpdate();
-    	            if(j>0) {
-                	JOptionPane.showMessageDialog(null, "THE  BOOK   "+BOOK_NAME.getText()+"   HAS  BEEN   ISSUED  SUCCESSFULLY...");
-    	            }else {
-    	            	JOptionPane.showMessageDialog(null,"SOMETHING WENT WRONG...TRY AGAIN....!");
-    	            }setVisible(false);
-                	User_Menu frame = new User_Menu();
-					frame.setVisible(true);
-					}else {
-                		JOptionPane.showMessageDialog(null, "somewent wrong.....try again later....!");	
-                	}
+	                CallableStatement st1 = con.prepareCall("{call issueproc(?,?,?,?,?,?,?,?,?,'NO',?)}");
+	                st1.setString(1,TR_NO.getText());
+		            st1.setString(2, (String) comboBox_book.getSelectedItem());
+	                st1.setString(3,ROLL_NUMBER.getText());
+	                st1.setString(4, FIRST_NAME.getText());
+	                st1.setString(5, BOOK_NAME.getText());
+	                st1.setString(6, AUTHOR.getText());
+	                st1.setString(7, EDITION.getText());
+	                st1.setString(8, datetime.getText());
+	                st1.setString(9, returndate.getText());
+	                st1.setString(10, CONTACT.getText());
+	                
+	                int i = st1.executeUpdate();
+	                if(i>0) {
+	                	System.out.print("execute issue procedure");
+                    	setVisible(false);
+                    	JOptionPane.showMessageDialog(null, "THE  BOOK   "+BOOK_NAME.getText()+"   HAS  BEEN   ISSUED  SUCCESSFULLY...");
+                    	setVisible(false);
+	                }
                 }
-             }
-		catch(NullPointerException ex)
-			{ex.printStackTrace();
-			} catch (SQLException e1) {
-			e1.printStackTrace();} 
+             
+                }catch (SQLException e1) {
+                	setVisible(false);
+	            	JOptionPane.showMessageDialog(null,"SOMETHING WENT WRONG...TRY AGAIN....!");
+	            	e1.printStackTrace();} 
 		}
 		});
 		btnNewButton_2.setForeground(Color.RED);

@@ -28,7 +28,6 @@ public class Statistics extends JFrame implements ActionListener{
             String sql = "select * from ISSUEBOOKS";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
-
             table.setModel(DbUtils.resultSetToTableModel(rs));
             rs.close();
             st.close();
@@ -43,8 +42,8 @@ public class Statistics extends JFrame implements ActionListener{
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 192, 203));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-	setContentPane(contentPane);
-	contentPane.setLayout(null);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
 	JScrollPane scrollPane = new JScrollPane();
 	scrollPane.setBounds(79, 133, 771, 282);

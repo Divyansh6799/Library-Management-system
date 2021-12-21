@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.Cursor;
 
 public class Profile extends JFrame implements ActionListener{
 
@@ -32,7 +34,6 @@ public class Profile extends JFrame implements ActionListener{
 	private static JTextField SEMESTER;
 	private static JTextField CONTACT;
 	private static JTextField MAIL_ID;
-
 	public static JTextField USERNAME;
 	
 
@@ -97,133 +98,132 @@ public class Profile extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public Profile() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 689, 423);
+		setBounds(500, 140, 709, 505);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 230, 140));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setUndecorated(true);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("MY PROFILE");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
-		lblNewLabel.setBounds(362, 13, 130, 31);
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 31));
+		lblNewLabel.setBounds(242, 13, 219, 51);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("ROLL NUMBER-");
+		lblNewLabel_1.setForeground(Color.CYAN);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_1.setBounds(30, 59, 137, 14);
+		lblNewLabel_1.setBounds(30, 80, 137, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		ROLL_NUMBER = new JTextField();
-		ROLL_NUMBER.setBounds(161, 58, 117, 20);
+		ROLL_NUMBER.setBounds(30, 105, 287, 31);
 		contentPane.add(ROLL_NUMBER);
 		ROLL_NUMBER.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("FIRST NAME-");
+		lblNewLabel_2.setForeground(Color.CYAN);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_2.setBounds(30, 112, 117, 14);
+		lblNewLabel_2.setBounds(30, 147, 117, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		FIRST_NAME = new JTextField();
-		FIRST_NAME.setBounds(161, 111, 117, 20);
+		FIRST_NAME.setBounds(30, 172, 287, 31);
 		contentPane.add(FIRST_NAME);
 		FIRST_NAME.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("LAST NAME-");
+		lblNewLabel_3.setForeground(Color.CYAN);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_3.setBounds(30, 160, 117, 14);
+		lblNewLabel_3.setBounds(30, 214, 117, 30);
 		contentPane.add(lblNewLabel_3);
 		
 		LAST_NAME = new JTextField();
-		LAST_NAME.setBounds(161, 159, 117, 20);
+		LAST_NAME.setBounds(30, 255, 287, 30);
 		contentPane.add(LAST_NAME);
 		LAST_NAME.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("GENDER-");
+		lblNewLabel_4.setForeground(Color.CYAN);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_4.setBounds(30, 213, 91, 14);
+		lblNewLabel_4.setBounds(30, 296, 91, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		GENDER = new JTextField();
-		GENDER.setBounds(161, 212, 117, 20);
+		GENDER.setBounds(30, 321, 287, 31);
 		contentPane.add(GENDER);
 		GENDER.setColumns(10);
 		
 		JLabel lblNewLabel_5 = new JLabel("COURSE-");
+		lblNewLabel_5.setForeground(Color.CYAN);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_5.setBounds(30, 260, 91, 14);
+		lblNewLabel_5.setBounds(30, 363, 91, 22);
 		contentPane.add(lblNewLabel_5);
 		
 		COURSE = new JTextField();
-		COURSE.setBounds(161, 259, 117, 20);
+		COURSE.setBounds(30, 395, 287, 30);
 		contentPane.add(COURSE);
 		COURSE.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel("BRANCH-");
+		lblNewLabel_6.setForeground(Color.CYAN);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_6.setBounds(351, 61, 97, 14);
+		lblNewLabel_6.setBounds(418, 75, 97, 14);
 		contentPane.add(lblNewLabel_6);
 		
 		BRANCH = new JTextField();
-		BRANCH.setBounds(458, 58, 116, 20);
+		BRANCH.setBounds(418, 100, 281, 31);
 		contentPane.add(BRANCH);
 		BRANCH.setColumns(10);
 		
 		JLabel lblNewLabel_7 = new JLabel("YEAR-");
+		lblNewLabel_7.setForeground(Color.CYAN);
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_7.setBounds(351, 112, 76, 14);
+		lblNewLabel_7.setBounds(418, 147, 76, 14);
 		contentPane.add(lblNewLabel_7);
 		
 		YEAR = new JTextField();
-		YEAR.setBounds(458, 111, 116, 20);
+		YEAR.setBounds(418, 172, 281, 30);
 		contentPane.add(YEAR);
 		YEAR.setColumns(10);
 		
 		JLabel lblNewLabel_8 = new JLabel("SEMESTER-");
+		lblNewLabel_8.setForeground(Color.CYAN);
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_8.setBounds(351, 162, 97, 14);
+		lblNewLabel_8.setBounds(418, 213, 97, 22);
 		contentPane.add(lblNewLabel_8);
 		
 		SEMESTER = new JTextField();
-		SEMESTER.setBounds(458, 159, 116, 20);
+		SEMESTER.setBounds(418, 248, 281, 31);
 		contentPane.add(SEMESTER);
 		SEMESTER.setColumns(10);
 		
 		JLabel lblNewLabel_9 = new JLabel("CONTACT-");
+		lblNewLabel_9.setForeground(Color.CYAN);
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_9.setBounds(351, 215, 97, 14);
+		lblNewLabel_9.setBounds(418, 296, 97, 14);
 		contentPane.add(lblNewLabel_9);
 		
 		CONTACT = new JTextField();
-		CONTACT.setBounds(458, 212, 116, 20);
+		CONTACT.setBounds(418, 321, 281, 31);
 		contentPane.add(CONTACT);
 		CONTACT.setColumns(10);
 		
 		JLabel lblNewLabel_10 = new JLabel("MAIL ID-");
+		lblNewLabel_10.setForeground(Color.CYAN);
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_10.setBounds(335, 262, 92, 14);
+		lblNewLabel_10.setBounds(418, 363, 92, 22);
 		contentPane.add(lblNewLabel_10);
 		
 		MAIL_ID = new JTextField();
-		MAIL_ID.setBounds(437, 259, 226, 20);
+		MAIL_ID.setBounds(418, 388, 281, 31);
 		contentPane.add(MAIL_ID);
 		MAIL_ID.setColumns(10);
 		
-		JButton btnNewButton = new JButton("<<<<");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				new User_Menu().setVisible(false);
-			}
-		});
-		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
-		btnNewButton.setBackground(Color.DARK_GRAY);
-		btnNewButton.setBounds(574, 335, 89, 23);
-		contentPane.add(btnNewButton);
-		
 		JButton btnNewButton_1 = new JButton("UPDATE MY PROFILE");
+		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
@@ -273,17 +273,33 @@ public class Profile extends JFrame implements ActionListener{
 		});
 		btnNewButton_1.setForeground(Color.RED);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 22));
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
-		btnNewButton_1.setBounds(211, 335, 281, 23);
+		btnNewButton_1.setBackground(Color.CYAN);
+		btnNewButton_1.setBounds(230, 449, 281, 31);
 		contentPane.add(btnNewButton_1);
 		
 		USERNAME = new JTextField();
 		USERNAME.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
 		USERNAME.setEditable(false);
-		USERNAME.setBackground(Color.ORANGE);
-		USERNAME.setBounds(30, 13, 171, 20);
+		USERNAME.setBackground(Color.LIGHT_GRAY);
+		USERNAME.setBounds(10, 11, 137, 22);
 		contentPane.add(USERNAME);
 		USERNAME.setColumns(10);
+		
+		JButton btnNewButton_2 = new JButton("");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\divya\\eclipse-workspace\\liberary management system\\library management system\\images\\icons8-close-35.png"));
+		btnNewButton_2.setBounds(642, 1, 67, 43);
+		contentPane.add(btnNewButton_2);
+		
+		JLabel lblNewLabel_11 = new JLabel("New label");
+		lblNewLabel_11.setIcon(new ImageIcon("C:\\Users\\divya\\eclipse-workspace\\liberary management system\\library management system\\images\\welcome.jpg"));
+		lblNewLabel_11.setBounds(0, 1, 709, 504);
+		contentPane.add(lblNewLabel_11);
 		
 		student();
 	}

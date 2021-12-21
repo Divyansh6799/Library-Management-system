@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.sql.*;
 import java.awt.event.*;
-import javax.swing.border.*;
 
 public  class Signup extends JFrame implements ActionListener{
 	
@@ -22,6 +21,11 @@ public  class Signup extends JFrame implements ActionListener{
 	private JComboBox<?> comboBox_3;	
 	private JTextField CONTACT;
 	private JTextField MAIL_ID;
+	private JTextField USERNAME;
+	private JPasswordField PASSWORD;
+	private JComboBox<?> comboBox_4;
+	private JTextField SECUIRTY_ANS;
+	private JLabel lblNewLabel_7;
 	private JRadioButton femaleRadioButton_1;
 	private JRadioButton otherRadioButton_2;
 
@@ -44,65 +48,38 @@ public  class Signup extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Signup() {
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 778, 484);
+		setBounds(480, 50, 738, 620);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(128, 0, 0));
-		contentPane.setBackground(new Color(204, 102, 204));
-		contentPane.setBorder(new TitledBorder(new LineBorder(new Color(0, 128, 128), 3, true), "PERSONAL  INFORMATION", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 128, 0)));
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(null);
 		contentPane.setBounds(67, 54, 793, 368);
+		setUndecorated(true);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("CREATE YOUR ACCOUNT");
-		lblNewLabel.setForeground(new Color(0, 51, 255));
-		lblNewLabel.setFont(new Font("Juice ITC", Font.BOLD | Font.ITALIC, 37));
-		lblNewLabel.setBounds(237, 21, 340, 36);
+		JLabel lblNewLabel = new JLabel("SIGN UP");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Imprint MT Shadow", Font.BOLD | Font.ITALIC, 37));
+		lblNewLabel.setBounds(249, 11, 201, 36);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("ROLL_NUMBER :");
-		lblNewLabel_1.setForeground(Color.CYAN);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_1.setBounds(49, 62, 152, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("FIRST NAME :");
-		lblNewLabel_2.setForeground(Color.CYAN);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_2.setBounds(49, 124, 156, 22);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("LAST NAME :");
-		lblNewLabel_3.setForeground(Color.CYAN);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_3.setBounds(49, 188, 139, 18);
-		contentPane.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel(" GENDER :");
+		JLabel lblNewLabel_4 = new JLabel("SELECT YOUR GENDER :");
 		lblNewLabel_4.setForeground(Color.CYAN);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_4.setBounds(49, 246, 110, 22);
+		lblNewLabel_4.setBounds(30, 215, 256, 22);
 		contentPane.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel(" COURSE :");
-		lblNewLabel_5.setForeground(Color.CYAN);
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_5.setBounds(432, 58, 99, 26);
-		contentPane.add(lblNewLabel_5);
-		
-		JLabel lblNewLabel_6 = new JLabel(" BRANCH :");
-		lblNewLabel_6.setForeground(Color.CYAN);
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_6.setBounds(432, 124, 89, 30);
-		contentPane.add(lblNewLabel_6);
-		
-		JButton btnNewButton = new JButton("NEXT PAGE");
+		JButton btnNewButton = new JButton("CREATE ACCOUNT");
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 26));
 		btnNewButton.addActionListener(new ActionListener() {
-
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try{
 					String gender="MALE";
@@ -112,8 +89,7 @@ public  class Signup extends JFrame implements ActionListener{
 						gender="OTHER";
 					}
 					Connection con=Connectionclass.getConnection();
-		    		String sql = "INSERT INTO STUDENT(ROLL_NUMBER,FIRST_NAME,LAST_NAME,GENDER, COURSE, BRANCH, YEAR,SEMESTER, CONTACT,MAIL_ID) VALUES(?,?,?,?, ?, ?, ?, ?, ?,?)";
-    	            PreparedStatement st = con.prepareStatement(sql);
+    	           	CallableStatement st = con.prepareCall("{call signup(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
     	            st.setString(1, ROLL_NUMBER.getText());
                     st.setString(2, FIRST_NAME.getText());
                     st.setString(3, LAST_NAME.getText());
@@ -124,50 +100,43 @@ public  class Signup extends JFrame implements ActionListener{
                     st.setString(8, (String) comboBox_3.getSelectedItem());
                     st.setString(9,  CONTACT.getText());
                     st.setString(10, MAIL_ID.getText());
-					
-					
-                    int i = st.executeUpdate();
+    	            st.setString(11, USERNAME.getText());
+					st.setString(12, PASSWORD.getText());
+					st.setString(13 ,(String) comboBox_4.getSelectedItem());
+					st.setString(14, SECUIRTY_ANS.getText());
+					int i = st.executeUpdate();
                     if(i>0) {
-                    	setVisible(false);
-                    	JOptionPane.showMessageDialog(null, "PLEASE ENTER MORE DETAILS FOR SECUIRTY PURPOSE");	
-                    	setVisible(false);
-                    	st.setString(1, ROLL_NUMBER.getText());
-    					String s = ROLL_NUMBER.getText();
-                   	 	Secuirty s1= new Secuirty();
-                   	 	s1.ROLL_NUMBER.setText(s);
-                   	 	s1.setVisible(true);
-                    }else {
-                    		JOptionPane.showMessageDialog(null, "somewent wrong");	
-                    	}
-				}catch(NullPointerException ex)
-				{
-					
-				ex.printStackTrace();
-					
-				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "FIRST COMPLETE THIS PAGE!");				}
-				
-			}
 
-			
-		});
-		btnNewButton.setBounds(266, 377, 201, 42);
+                    		System.out.print("execute signup procedure");
+	                    	setVisible(false);
+	                    	JOptionPane.showMessageDialog(null, "your account is created","MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+	                        setVisible(false);
+//	        				new Login().setVisible(true);
+                    }
+				}
+                    	catch(Exception ex){
+                    		setVisible(false);
+                    		JOptionPane.showMessageDialog(null, "SOMETHING WENT WRONG ..Try Again!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    		ex.printStackTrace();
+        				}
+                    	
+                    }
+        });
+		btnNewButton.setBounds(249, 506, 277, 36);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("<<<<");
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.setIcon(new ImageIcon(Signup.class.getResource("/images/icons8-close-35.png")));
+		btnNewButton_1.setBackground(Color.LIGHT_GRAY);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
 		btnNewButton_1.setForeground(new Color(220, 20, 60));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				setVisible(false);
-				Login frame = new Login ();
-				frame.setVisible(true);
-				Login.lblNewLabel_7.setText("USER LOGIN");
-				Login.lblNewLabel_3.setVisible(false); 
+				setVisible(false);			
 			}
 		});
-		btnNewButton_1.setBounds(0, 11, 105, 23);
+		btnNewButton_1.setBounds(676, 0, 62, 36);
 		contentPane.add(btnNewButton_1);
 		
 		ROLL_NUMBER = new JTextField();
@@ -191,7 +160,7 @@ public  class Signup extends JFrame implements ActionListener{
 		ROLL_NUMBER.setText("ENTER YOUR ROLL NUMBER");
 		ROLL_NUMBER.setForeground(Color.ORANGE);
 		ROLL_NUMBER.setBackground(Color.BLACK);
-		ROLL_NUMBER.setBounds(49, 83, 256, 36);
+		ROLL_NUMBER.setBounds(30, 77, 318, 36);
 		contentPane.add(ROLL_NUMBER);
 		ROLL_NUMBER.setColumns(10);
 		
@@ -216,7 +185,7 @@ public  class Signup extends JFrame implements ActionListener{
 		FIRST_NAME.setText("ENTER YOUR FIRST NAME");
 		FIRST_NAME.setForeground(Color.ORANGE);
 		FIRST_NAME.setBackground(Color.BLACK);
-		FIRST_NAME.setBounds(49, 145, 256, 36);
+		FIRST_NAME.setBounds(30, 124, 318, 36);
 		contentPane.add(FIRST_NAME);
 		FIRST_NAME.setColumns(10);
 		
@@ -241,27 +210,9 @@ public  class Signup extends JFrame implements ActionListener{
 		LAST_NAME.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		LAST_NAME.setForeground(Color.ORANGE);
 		LAST_NAME.setBackground(Color.BLACK);
-		LAST_NAME.setBounds(49, 205, 256, 33);
+		LAST_NAME.setBounds(30, 171, 318, 33);
 		contentPane.add(LAST_NAME);
 		LAST_NAME.setColumns(10);
-		
-		JLabel lblNewLabel_7 = new JLabel("YEAR :");
-		lblNewLabel_7.setForeground(Color.CYAN);
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_7.setBounds(432, 184, 79, 26);
-		contentPane.add(lblNewLabel_7);
-		
-		JLabel lblNewLabel_8 = new JLabel("SEMESTER :");
-		lblNewLabel_8.setForeground(Color.CYAN);
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_8.setBounds(432, 243, 110, 24);
-		contentPane.add(lblNewLabel_8);
-		
-		JLabel lblNewLabel_9 = new JLabel("CONTACT :");
-		lblNewLabel_9.setForeground(Color.CYAN);
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_9.setBounds(49, 313, 110, 26);
-		contentPane.add(lblNewLabel_9);
 		
 		CONTACT = new JTextField();
 		CONTACT.addFocusListener(new FocusAdapter() {
@@ -284,15 +235,9 @@ public  class Signup extends JFrame implements ActionListener{
 		CONTACT.setText("ENTER YOUR MOBILE NUMBER");
 		CONTACT.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		CONTACT.setBackground(Color.BLACK);
-		CONTACT.setBounds(97, 341, 247, 25);
+		CONTACT.setBounds(30, 284, 318, 42);
 		contentPane.add(CONTACT);
 		CONTACT.setColumns(10);
-		
-		JLabel lblNewLabel_10 = new JLabel("MAIL-ID :");
-		lblNewLabel_10.setForeground(Color.CYAN);
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_10.setBounds(443, 313, 109, 22);
-		contentPane.add(lblNewLabel_10);
 		
 		MAIL_ID = new JTextField();
 		MAIL_ID.addFocusListener(new FocusAdapter() {
@@ -315,7 +260,7 @@ public  class Signup extends JFrame implements ActionListener{
 		MAIL_ID.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		MAIL_ID.setForeground(Color.ORANGE);
 		MAIL_ID.setBackground(Color.BLACK);
-		MAIL_ID.setBounds(442, 341, 292, 25);
+		MAIL_ID.setBounds(432, 284, 292, 42);
 		contentPane.add(MAIL_ID);
 		MAIL_ID.setColumns(10);
 		
@@ -324,21 +269,21 @@ public  class Signup extends JFrame implements ActionListener{
 		maleRadioButton.setBackground(Color.BLACK);
 		maleRadioButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		maleRadioButton.setSelected(true);
-		maleRadioButton.setBounds(49, 273, 110, 23);
+		maleRadioButton.setBounds(30, 244, 102, 36);
 		contentPane.add(maleRadioButton);
 		
 		femaleRadioButton_1 = new JRadioButton("FEMALE");
 		femaleRadioButton_1.setForeground(Color.RED);
 		femaleRadioButton_1.setBackground(Color.BLACK);
 		femaleRadioButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		femaleRadioButton_1.setBounds(165, 273, 110, 23);
+		femaleRadioButton_1.setBounds(134, 244, 108, 36);
 		contentPane.add(femaleRadioButton_1);
 		
 		otherRadioButton_2 = new JRadioButton("OTHER");
 		otherRadioButton_2.setForeground(Color.RED);
 		otherRadioButton_2.setBackground(Color.BLACK);
 		otherRadioButton_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		otherRadioButton_2.setBounds(288, 273, 110, 23);
+		otherRadioButton_2.setBounds(246, 247, 102, 31);
 		contentPane.add(otherRadioButton_2);
 		
 		ButtonGroup bg=new ButtonGroup();
@@ -347,9 +292,12 @@ public  class Signup extends JFrame implements ActionListener{
 		bg.add(otherRadioButton_2);
 		
 		comboBox = new JComboBox<>();
+		comboBox.setName("");
+		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		comboBox.setAutoscrolls(true);
 		comboBox.setForeground(Color.RED);
-		comboBox.setBackground(Color.LIGHT_GRAY);
-		comboBox.setFont(new Font("Tahoma", Font.ITALIC, 15));
+		comboBox.setBackground(Color.BLACK);
+		comboBox.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		/*comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if("DIPLOMA".equals(comboBox.getSelectedItem())) {
@@ -359,44 +307,203 @@ public  class Signup extends JFrame implements ActionListener{
 				}
 			}
 		});*/
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"B.TECH", "DIPLOMA", "BBA", "BCA", "MBA", "MCA", "M.TECH"}));
-		comboBox.setBounds(432, 84, 219, 27);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"SELECT YOUR COURSE", "B.TECH", "DIPLOMA", "BBA", "BCA", "MBA", "MCA", "M.TECH"}));
+		comboBox.setBounds(432, 76, 292, 36);
 		contentPane.add(comboBox);
 	
 		
 		comboBox_1 = new JComboBox<>();
+		comboBox_1.setAutoscrolls(true);
+		comboBox_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		comboBox_1.setForeground(Color.RED);
-		comboBox_1.setBackground(Color.LIGHT_GRAY);
-		comboBox_1.setFont(new Font("Tahoma", Font.ITALIC, 15));
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"CSE", "IT", "EC", "ME", "CE", "EE"}));
-		comboBox_1.setBounds(432, 153, 219, 22);
+		comboBox_1.setBackground(Color.BLACK);
+		comboBox_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"SELECT YOUR BRANCH", "CSE", "IT", "EC", "ME", "CE", "EE"}));
+		comboBox_1.setBounds(432, 130, 292, 30);
 		contentPane.add(comboBox_1);
 		
 		comboBox_2 = new JComboBox<>();
+		comboBox_2.setAutoscrolls(true);
+		comboBox_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		comboBox_2.setForeground(Color.RED);
-		comboBox_2.setBackground(Color.LIGHT_GRAY);
-		comboBox_2.setFont(new Font("Tahoma", Font.ITALIC, 15));
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
-		comboBox_2.setBounds(432, 218, 219, 22);
+		comboBox_2.setBackground(Color.BLACK);
+		comboBox_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"SELECT YOUR YEAR", "1", "2", "3", "4"}));
+		comboBox_2.setBounds(432, 176, 292, 36);
 		contentPane.add(comboBox_2);
 		
 		comboBox_3 = new JComboBox<>();
+		comboBox_3.setAutoscrolls(true);
+		comboBox_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		comboBox_3.setForeground(Color.RED);
-		comboBox_3.setBackground(Color.LIGHT_GRAY);
-		comboBox_3.setFont(new Font("Tahoma", Font.ITALIC, 15));
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"1 ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  "}));
-		comboBox_3.setBounds(432, 275, 219, 22);
+		comboBox_3.setBackground(Color.BLACK);
+		comboBox_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"SELECT YOUR SEMESTER", "1 ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  "}));
+		comboBox_3.setBounds(432, 226, 292, 42);
 		contentPane.add(comboBox_3);
 		
-		JLabel lblNewLabel_11 = new JLabel("+91");
-		lblNewLabel_11.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_11.setBounds(59, 341, 46, 26);
+		
+		
+		JLabel lblNewLabel_11 = new JLabel("ALREADY HAVE AN ACCOUNT !");
+		lblNewLabel_11.setForeground(Color.CYAN);
+		lblNewLabel_11.setFont(new Font("Stencil", Font.ITALIC, 17));
+		lblNewLabel_11.setBounds(165, 578, 271, 35);
 		contentPane.add(lblNewLabel_11);
-	}
+		
+		JButton btnNewButton_2 = new JButton("SIGN IN");
+		btnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				
+			}
+		});
+		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		btnNewButton_2.setBounds(432, 573, 152, 36);
+		contentPane.add(btnNewButton_2);
+		
+		USERNAME = new JTextField();
+		USERNAME.setBackground(Color.BLACK);
+		USERNAME.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(USERNAME.getText().equals("ENTER YOUR USERNAME")) {
+					USERNAME.setText("");
+					USERNAME.setForeground(Color.ORANGE);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(USERNAME.getText().equals("")) {
+					USERNAME.setText("ENTER YOUR USERNAME");
+					USERNAME.setForeground(Color.ORANGE);
+				}
+			}
+		});
+		USERNAME.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		USERNAME.setForeground(Color.ORANGE);
+		USERNAME.setText("ENTER YOUR USERNAME");
+		USERNAME.setBounds(30, 337, 318, 42);
+		contentPane.add(USERNAME);
+		USERNAME.setColumns(10);
+		
+		PASSWORD = new JPasswordField();
+		PASSWORD.addKeyListener(new KeyAdapter() {
+			@SuppressWarnings("deprecation")
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!Character.isDigit(c)) {
+					e.consume();
+					lblNewLabel_7.setText("ENTER ONLY NUMBERS");
+				}if(PASSWORD.getText().length()>3) {
+					e.consume();
+					lblNewLabel_7.setText("PASSWORD MUST BE 4 DIGITS");
+				}
+				else {
+					lblNewLabel_7.setText("");
+				}
+			}
+		});
+		PASSWORD.setBackground(Color.BLACK);
+		PASSWORD.setEchoChar((char)0);
+		PASSWORD.addFocusListener(new FocusAdapter() {
+			@SuppressWarnings("deprecation")
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(PASSWORD.getText().equals("ENTER YOUR PASSWORD")) {
+					PASSWORD.setText("");
+					PASSWORD.setEchoChar('*');
+					PASSWORD.setForeground(Color.ORANGE);
+				}
+			}
+			@SuppressWarnings("deprecation")
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(PASSWORD.getText().equals("")) {
+					PASSWORD.setEchoChar((char)0);
+					PASSWORD.setText("ENTER YOUR PASSWORD");
+					PASSWORD.setForeground(Color.ORANGE);
+				}
+			}
+		});
+		PASSWORD.setText("ENTER YOUR PASSWORD");
+		PASSWORD.setForeground(Color.ORANGE);
+		PASSWORD.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		PASSWORD.setBounds(30, 392, 318, 42);
+		contentPane.add(PASSWORD);
+		
+		final JCheckBox chckbxNewCheckBox = new JCheckBox("SHOW PASSWORD");
+		chckbxNewCheckBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		chckbxNewCheckBox.setForeground(Color.RED);
+		chckbxNewCheckBox.setBackground(Color.LIGHT_GRAY);
+		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxNewCheckBox.isSelected()) {
+					PASSWORD.setEchoChar((char)0);
+				}
+				else {
+					PASSWORD.setEchoChar('*');
+				}
+			}
+		});
+		chckbxNewCheckBox.setBounds(29, 441, 193, 23);
+		contentPane.add(chckbxNewCheckBox);
+		
+
+		comboBox_4 = new JComboBox();
+		comboBox_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		comboBox_4.setBackground(Color.BLACK);
+		comboBox_4.setForeground(Color.RED);
+		comboBox_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"SELECT YOUR SECUIRTY QUESTION", "Your NickName?", "Your Lucky Number?", "Your child SuperHero?", "Your Favourite game?"}));
+		comboBox_4.setBounds(432, 337, 292, 42);
+		contentPane.add(comboBox_4);
+		
+		SECUIRTY_ANS = new JTextField();
+		SECUIRTY_ANS.setBackground(Color.BLACK);
+		SECUIRTY_ANS.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(SECUIRTY_ANS.getText().equals("ENTER YOUR SECUIRTY ANSWER")) {
+					SECUIRTY_ANS.setText("");
+					SECUIRTY_ANS.setForeground(Color.ORANGE);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(SECUIRTY_ANS.getText().equals("")) {
+					SECUIRTY_ANS.setText("ENTER YOUR SECUIRTY ANSWER");
+					SECUIRTY_ANS.setForeground(Color.ORANGE);
+				}
+			}
+		});
+		SECUIRTY_ANS.setText("ENTER YOUR SECUIRTY ANSWER");
+		SECUIRTY_ANS.setForeground(Color.ORANGE);
+		SECUIRTY_ANS.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		SECUIRTY_ANS.setBounds(436, 392, 288, 42);
+		contentPane.add(SECUIRTY_ANS);
+		SECUIRTY_ANS.setColumns(10);
+		
+		lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setForeground(Color.CYAN);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		lblNewLabel_7.setBounds(30, 472, 303, 23);
+		contentPane.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setIcon(new ImageIcon(Signup.class.getResource("/images/ADMIN SECTION.jpg")));
+		lblNewLabel_12.setBounds(0, 0, 738, 620);
+		contentPane.add(lblNewLabel_12);
+		
+		
+
+		}		
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-}
+}	

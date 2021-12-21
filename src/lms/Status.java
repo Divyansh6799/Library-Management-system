@@ -28,6 +28,7 @@ public class Status extends JFrame implements ActionListener{
     public static void student() {
 	try {
 			Connection con=Connectionclass.getConnection();
+			
 			 String sql = "select s.*FROM  ISSUEBOOKS  s   JOIN login  l"
 	            		+ " on s.ROLL_NUMBER=l.ROLL_NUMBER"
 	            		+ " WHERE l.USERNAME=?";
@@ -83,8 +84,7 @@ public class Status extends JFrame implements ActionListener{
 		public void keyPressed(KeyEvent ae) {
 			if(ae.getKeyCode()==KeyEvent.VK_ENTER) {
 				 try{
-	    	            
-	    	        	Connection con=Connectionclass.getConnection();
+	    	           	Connection con=Connectionclass.getConnection();
 	    	            String sql = "select * from ISSUEBOOKS where concat(NAME, ROLL_NUMBER) like ?";
 	    	            PreparedStatement st = con.prepareStatement(sql);
 	    	            st.setString(1, "%" + search.getText() + "%");
@@ -129,10 +129,6 @@ public class Status extends JFrame implements ActionListener{
 		});
 	l3.setForeground(Color.GRAY);
 	l3.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
-	//ImageIcon i7 = new ImageIcon(ClassLoader.getSystemResource("library/management/system/icons/tenth.png"));
-        //Image i8 = i7.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-       // ImageIcon i9 = new ImageIcon(i8);
-       // l3.setIcon(i9);
 	l3.setBounds(97, 89, 72, 33);
 	contentPane.add(l3);
 
