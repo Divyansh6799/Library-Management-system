@@ -111,12 +111,12 @@ public class User_Menu extends JFrame {
 		
 		
 		
-		JButton btnNewButton_6 = new JButton("BACK TO LOGIN");
+		JButton btnNewButton_6 = new JButton("");
 		btnNewButton_6.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnNewButton_6.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_6.setIcon(new ImageIcon(User_Menu.class.getResource("/images/LOGOUT.png")));
-		btnNewButton_6.setBounds(10, 497, 182, 81);
+		btnNewButton_6.setBounds(384, 0, 58, 75);
 		btnNewButton_6.setForeground(Color.RED);
 		btnNewButton_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,7 +131,7 @@ public class User_Menu extends JFrame {
 		btnNewButton_1.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.setIcon(new ImageIcon(User_Menu.class.getResource("/images/student.png")));
-		btnNewButton_1.setBounds(10, 210, 182, 69);
+		btnNewButton_1.setBounds(10, 210, 187, 68);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String sr = USERNAME.getText();
@@ -233,14 +233,14 @@ public class User_Menu extends JFrame {
 		NAME.setEditable(false);
 		NAME.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
 		NAME.setBackground(Color.GRAY);
-		NAME.setBounds(118, 161, 230, 27);
+		NAME.setBounds(119, 161, 229, 27);
 		panel.add(NAME);
 		NAME.setColumns(10);
 		
 		btnNewButton_9 = new JButton("STUDENT RECORD");
 		btnNewButton_9.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnNewButton_9.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton_9.setBounds(247, 399, 187, 72);
+		btnNewButton_9.setBounds(247, 402, 187, 72);
 		panel.add(btnNewButton_9);
 		btnNewButton_9.setBackground(Color.CYAN);
 		btnNewButton_9.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -253,22 +253,6 @@ public class User_Menu extends JFrame {
 		btnNewButton_9.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		btnNewButton_9.setForeground(Color.RED);
 		
-		btnNewButton_8 = new JButton("STATISTICS");
-		btnNewButton_8.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton_8.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnNewButton_8.setBounds(247, 497, 187, 81);
-		panel.add(btnNewButton_8);
-		btnNewButton_8.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_8.setBackground(Color.CYAN);
-		btnNewButton_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				new Statistics().setVisible(true);
-			}
-		});
-		btnNewButton_8.setIcon(new ImageIcon(User_Menu.class.getResource("/images/statistics.png")));
-		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_8.setForeground(Color.RED);
 		
 		btnNewButton_3 = new JButton("BOOKS  RECORDS");
 		btnNewButton_3.setBounds(247, 211, 187, 69);
@@ -337,7 +321,7 @@ public class User_Menu extends JFrame {
 		
 		
 		btnNewButton = new JButton("STATUS");
-		btnNewButton.setBounds(247, 497, 187, 81);
+		btnNewButton.setBounds(119, 485, 187, 81);
 		panel.add(btnNewButton);
 		btnNewButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -358,6 +342,7 @@ public class User_Menu extends JFrame {
 		btnNewButton.setBackground(Color.CYAN);
 		
 		btnNewButton_10 = new JButton("ADD BOOKS");
+		btnNewButton_10.setIcon(new ImageIcon(User_Menu.class.getResource("/images/addbook.png")));
 		btnNewButton_10.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnNewButton_10.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnNewButton_10.setForeground(Color.RED);
@@ -388,7 +373,7 @@ public class User_Menu extends JFrame {
 		USERNAME = new JLabel();
 		USERNAME.setSize(138, 34);
 		USERNAME.setLocation(887, 9);
-		USERNAME.setText("ADMIN");
+		USERNAME.setText("AYUSHI");
 		USERNAME.setBackground(Color.LIGHT_GRAY);
 		contentPane.add(USERNAME);
 		USERNAME.setHorizontalAlignment(SwingConstants.CENTER);
@@ -397,25 +382,7 @@ public class User_Menu extends JFrame {
 		USERNAME.setForeground(Color.RED);
 		
 
-		
-//		final JToggleButton tglbtnNewToggleButton = new JToggleButton("");
-//		tglbtnNewToggleButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//		tglbtnNewToggleButton.setIcon(new ImageIcon("C:\\Users\\divya\\eclipse-workspace\\liberary management system\\library management system\\images\\menu (1).png"));
-//		tglbtnNewToggleButton.setBounds(10, 9, 75, 53);
-//		contentPane.add(tglbtnNewToggleButton);
-//		tglbtnNewToggleButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
-//		tglbtnNewToggleButton.setBackground(Color.CYAN);
-//		tglbtnNewToggleButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//			    if(tglbtnNewToggleButton.isSelected()) {
-//			    	panel.setSize(304, 505);
-//			    	panel.setVisible(true);
-//			    }else {
-//			    	panel.setSize(0,0);
-//			    }
-//			}
-//		});
-		
+				
 		datetime = new JLabel("");
 		datetime.setHorizontalAlignment(SwingConstants.LEFT);
 		datetime.setForeground(Color.BLUE);

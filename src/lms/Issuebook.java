@@ -152,7 +152,7 @@ public class Issuebook extends JFrame {
 		datetime = new JLabel("");
 		datetime.setForeground(Color.BLUE);
 		datetime.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
-		datetime.setBounds(197, 320, 162, 28);
+		datetime.setBounds(197, 320, 138, 28);
 		contentPane.add(datetime);
 		
 		returndate = new JLabel("");
@@ -382,6 +382,7 @@ public class Issuebook extends JFrame {
 		contentPane.add(lblNewLabel_17);
 		
 		BRANCH_1 = new JTextField();
+		BRANCH_1.setEditable(false);
 		BRANCH_1.setBounds(531, 261, 153, 20);
 		contentPane.add(BRANCH_1);
 		BRANCH_1.setColumns(10);
